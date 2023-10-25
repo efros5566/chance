@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOUBLE HOME PAGE</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="CSS/styleHomePage.css">
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif; 
+    background-image: url("img/gifHomePage_me.gif");
+    background-size:100%;
+    align-items: center;
+  }
+  #imgLink {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 5%;
+  }
+  input[type="text"], input[type="password"], select {
+    padding: 10px;
+    border: 2px solid #af4c86;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    width: 30%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    color: #af4c86;
+    font-weight: bold;
+    text-align: center;
+}
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: #2d26ba;
+    background-color: rgba(240, 248, 255, 0.753);
+}
+#containButton{
+    margin-top: 20%;
+    margin-left: 42%;
+    color: aliceblue;
+}
+button[type="button"], button[type="submit"] {
+			padding: 10px 20px;
+			background-color: #af4c86;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 10px;
+			transition: background-color 0.3s ease;
+      width: 30%;
+		}
+
+		button[type="button"]:hover, button[type="submit"]:hover {
+			background-color: #af4c86;
+		}
+
+  </style>
+  <body>
+    <div id="containButton">
+			<input type="text" id="name" name="name"><labl> :הכנס שם</labl><br>
+      <button id="SetName"type="submit">שמירה</button><br></div>
+      
+      <a href="html/doubleGame.html">
+      <img src="img/empty.png" id="imgLink"/>
+      </a>
+  </body>
+  <script>
+let isExist=0;
+let arrScores=[];
+function setDetails(){
+saveName=document.querySelector("#name").value;
+if(saveName=="")
+ document.querySelector("#name").style.border="#af4c86 5px solid";
+else{
+arrScores= localStorage.getItem("namesArr");
+arrScores=JSON.parse(arrScores) || [];
+console.log(arrScores);
+for(let i=0;i<arrScores.length;i++){
+ if(arrScores[i].playerName===saveName){
+    isExist=1;
+   break;
+ }
+}
+if(isExist==0){
+  arrScores.push({playerName:saveName});
+
+  //let newUser=document.createElement("p");
+  //newUser.setAttribute("class","newUser");
+  //newUser.innerHTML="המערכת זיהת שאתה משתמש חדש אנחנו שמחים על השתתפותך במשחק בהצלחה!";
+  //document.body.appendChild(newUser);
+  document.getElementById("SetName").innerHTML="!!!המערכת זיהתה שאתה משתמש חדש בהצלחה";
+}
+else
+{
+  document.getElementById("SetName").innerHTML="!!!זוכרים אותך ממשחקים קודמים בהצלחה במשחק הנוכחי";
+}
+ let newArr=JSON.stringify(arrScores);
+ localStorage.setItem("namesArr",newArr);
+}
+} 
+document.getElementById("SetName").addEventListener("click",setDetails);
+  </script>
+</html>
